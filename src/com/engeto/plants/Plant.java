@@ -10,7 +10,7 @@ public class Plant implements Comparable<Plant> {
     private LocalDate lastWateringDate;
     private int freqOfWatering;
 
-    public Plant(String name, String notes, LocalDate plantDate, LocalDate lastWateringDate, int freqOfWatering) throws PlantException {
+    public Plant(String name, String notes, LocalDate plantDate, LocalDate lastWateringDate, int freqOfWatering) throws InvalidPlantException {
         this.name = name;
         this.notes = notes;
         this.plantDate = plantDate;
@@ -20,11 +20,11 @@ public class Plant implements Comparable<Plant> {
         validateLastWateringDate();
     }
 
-    public Plant(String name, int freqOfWatering) throws PlantException {
+    public Plant(String name, int freqOfWatering) throws InvalidPlantException {
         this(name, "", LocalDate.now(), LocalDate.now(), freqOfWatering);
     }
 
-    public Plant(String name) throws PlantException {
+    public Plant(String name) throws InvalidPlantException {
         this(name, "", LocalDate.now(), LocalDate.now(), 7);
     }
 
@@ -47,15 +47,19 @@ public class Plant implements Comparable<Plant> {
         return date.format(dateFormatter);
     }
 
-    private void checkPositiveFrequency() throws PlantException {
+    private void checkPositiveFrequency() throws InvalidPlantException {
         if (freqOfWatering <= 0) {
-            throw new PlantException("Frekvence zalévání musí být větší než 0!");
+            throw new InvalidPlantException(
+                    "Frekvence zalévání musí být větší než 0!",
+                    "freqOfWatering",
+                    freqOfWatering
+            );
         }
     }
 
-    private void validateLastWateringDate() throws PlantException {
+    private void validateLastWateringDate() throws InvalidPlantException {
         if (lastWateringDate.isBefore(plantDate)) {
-            throw new PlantException("Datum poslední zálivky nesmí být starší než datum vysazení rostliny!");
+            throw new InvalidPlantException("Datum poslední zálivky nesmí být starší než datum vysazení rostliny!");
         }
     }
 
@@ -88,7 +92,7 @@ public class Plant implements Comparable<Plant> {
         return lastWateringDate;
     }
 
-    public void setLastWateringDate(LocalDate lastWateringDate) throws PlantException {
+    public void setLastWateringDate(LocalDate lastWateringDate) throws InvalidPlantException {
         this.lastWateringDate = lastWateringDate;
         validateLastWateringDate();
     }
@@ -97,13 +101,12 @@ public class Plant implements Comparable<Plant> {
         return freqOfWatering;
     }
 
-    public void setFreqOfWatering(int freqOfWatering) throws PlantException {
+    public void setFreqOfWatering(int freqOfWatering) throws InvalidPlantException {
         this.freqOfWatering = freqOfWatering;
         checkPositiveFrequency();
     }
 
     // endregion
-
     @Override
     public int compareTo(Plant other) {
         return this.name.compareTo(other.name);
