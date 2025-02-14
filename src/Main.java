@@ -7,7 +7,9 @@ public class Main {
             System.out.println(plant.getWateringInfo());
             System.out.println(plant.getNextWateringDate());
             PlantManager plants = new PlantManager();
-            plants.addPlantsFromFile(Constants.FILENAME, Constants.DELIMITER);
+//            plants.addPlantsFromFile(Constants.FILENAME, Constants.DELIMITER);
+//            plants.addPlantsFromFile(Constants.FILENAME_WRONG_FREQ, Constants.DELIMITER);
+            plants.addPlantsFromFile(Constants.FILENAME_WRONG_DATE, Constants.DELIMITER);
             System.out.println(plants.getPlants().size());
         } catch (InvalidPlantException e) {
             e.printStackTrace();

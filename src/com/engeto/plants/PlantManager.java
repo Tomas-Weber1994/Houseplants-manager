@@ -52,8 +52,8 @@ public class PlantManager {
         plants.sort(Comparator.comparing(Plant::getLastWateringDate));
     }
 
-    public void addPlantsFromFile(String filename, String delimeter) throws PlantReadException {
-        PlantFileReader plantFileReader = new PlantFileReader(filename, delimeter);
+    public void addPlantsFromFile(String filename, String delimiter) throws PlantReadException {
+        PlantFileReader plantFileReader = new PlantFileReader(filename, delimiter);
         List<Plant> newPlants = plantFileReader.parsePlantsFromFile();
         plants.addAll(newPlants);
     }
