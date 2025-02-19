@@ -52,7 +52,7 @@ public class PlantManager {
         plants.sort(Comparator.comparing(Plant::getLastWateringDate));
     }
 
-    public void addPlantsFromFile(String filename, String delimiter) throws PlantReadException {
+    public void addPlantsFromFile(String filename, String delimiter) throws PlantFileNotFoundException, PlantReadException {
         PlantFileReader plantFileReader = new PlantFileReader(filename, delimiter);
         List<Plant> newPlants = plantFileReader.parsePlantsFromFile();
         plants.addAll(newPlants);

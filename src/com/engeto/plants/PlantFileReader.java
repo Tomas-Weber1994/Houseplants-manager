@@ -18,31 +18,43 @@ public class PlantFileReader {
         this.delimiter = delimiter;
     }
 
-    public List<Plant> parsePlantsFromFile() throws PlantReadException {
+    public List<Plant> parsePlantsFromFile() throws PlantReadException, PlantFileNotFoundException {
         List<Plant> plants = new ArrayList<>();
         int lineNumber = 0;
+
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))) {
             while (scanner.hasNextLine()) {
                 lineNumber++;
                 String line = scanner.nextLine();
+                if (line.isEmpty()) continue;
                 String[] values = line.split(delimiter);
-                String name = values[0];
-                String notes = values[1];
-                int freqOfWatering = parseFreqOfWatering(values, lineNumber);
-                LocalDate lastWateringDate = parseDate(values, 3, lineNumber);
-                LocalDate plantDate = parseDate(values, 4, lineNumber);
-                Plant plant = new Plant(name, notes, plantDate, lastWateringDate, freqOfWatering);
-                plants.add(plant);
+                try {
+                    Plant plant = parseLine(values, lineNumber);
+                    plants.add(plant);
+                } catch (InvalidPlantException e) {
+                    throw new PlantReadException(filename, lineNumber, "Chyba při načítání rostliny", e.getMessage());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new PlantReadException(filename, lineNumber, "V souboru chybí některé hodnoty.", e.getMessage());
+                }
             }
         } catch (FileNotFoundException e) {
-            throw new PlantReadException(
-                    "Nepodařilo se najít soubor: " + filename + " " + e.getLocalizedMessage());
-        } catch (InvalidPlantException e) {
-            throw new PlantReadException(
-                    "Chyba při načítání rostlin ze souboru: " + filename + " " + e.getLocalizedMessage()
-            );
+            throw new PlantFileNotFoundException("Nepodařilo se najít soubor: " + filename);
         }
-        return plants;
+        return List.copyOf(plants);
+    }
+
+    private Plant parseLine(String[] values, int lineNumber) throws InvalidPlantException, PlantReadException {
+        String name = values[0];
+        return switch (values.length) {
+            case 1 -> new Plant(name);
+            case 2 -> new Plant(name, parseFreqOfWatering(values, lineNumber));
+            default -> new Plant(
+                    name,
+                    values[1],
+                    parseDate(values, 4, lineNumber),
+                    parseDate(values, 3, lineNumber),
+                    parseFreqOfWatering(values, lineNumber));
+        };
     }
 
     private int parseFreqOfWatering(String[] values, int lineNumber) throws PlantReadException {

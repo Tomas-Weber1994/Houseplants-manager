@@ -6,7 +6,4 @@ public class Constants {
     public static final String FILENAME = "resources/kvetiny.txt";
     public static final String DELIMITER = "\\t";
 
-//    public static void main(String[] args) {
-//        System.out.println("Ahoj");
-//    }
 }
