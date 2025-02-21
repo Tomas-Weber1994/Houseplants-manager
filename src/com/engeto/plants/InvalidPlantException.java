@@ -18,12 +18,4 @@ public class InvalidPlantException extends Exception {
     public String toString() {
         return super.toString() + " [Atribut: " + invalidField + ", Hodnota: " + invalidValue + "].";
     }
-
-    public String getInvalidField() {
-        return invalidField;
-    }
-
-    public Object getInvalidValue() {
-        return invalidValue;
-    }
 }

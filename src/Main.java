@@ -13,14 +13,14 @@ public class Main {
         try {
             logger.info("Aplikace úspěšně spuštěna!");
             Plant plant = new Plant("Tulipán", 10);
+            logger.info("Založena květina: " + plant.getName());
             logger.info("Informace o zalévání: " + plant.getWateringInfo());
             logger.info("Další termín zalévání: " + plant.getNextWateringDate());
 
-            // plants.addPlantsFromFile(Constants.getFilename(), Constants.getDelimiter());
-            plants.addPlantsFromFile(Constants.getFilenameWrongDate(), Constants.getDelimiter());
+             plants.addPlantsFromFile(Constants.getFilename(), Constants.getDelimiter());
+//            plants.addPlantsFromFile(Constants.getFilenameWrongDate(), Constants.getDelimiter());
             // plants.addPlantsFromFile(Constants.getFilenameWrongFreq(), Constants.getDelimiter());
-
-            logger.info("Aktuálně mám načtený tento počet rostlin: " + plants.getPlants().size());
+            logger.info("Načtení rostlin ze souboru " + Constants.getFilename() + " proběhlo úspěšně.");
         } catch (InvalidPlantException e) {
             logger.log(Level.SEVERE, "Vytvoření rostliny či její úpravu nelze provést: " + e.getMessage(), e);
         } catch (PlantFileNotFoundException | PlantReadException e) {

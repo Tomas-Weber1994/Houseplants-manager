@@ -29,7 +29,7 @@ public class Plant implements Comparable<Plant> {
     }
 
     public String getWateringInfo() {
-        return "Název květiny: " + name + "\nDatum poslední zálivky: " +
+        return "\nDatum poslední zálivky: " +
                 formatDate(lastWateringDate) + "\nDoporučené datum příští zálivky: " +
                 formatDate(getNextWateringDate());
     }

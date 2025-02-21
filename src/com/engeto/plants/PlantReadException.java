@@ -19,5 +19,4 @@ public class PlantReadException extends Exception {
         return "Chyba při čtení souboru '" + filename + "' na řádku " + lineNumber +
                 ": " + errorDetail + " (Neplatná hodnota: '" + invalidValue + "')";
     }
-//    Possibility add getters for logging
 }

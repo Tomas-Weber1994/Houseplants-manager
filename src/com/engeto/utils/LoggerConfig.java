@@ -10,7 +10,6 @@ public class LoggerConfig {
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);
             logger.setLevel(Level.ALL);
-            // Currently logging just warnings + critical errors -> would be better to log the whole app process
         } catch (IOException e) {
             System.err.println("Chyba při konfiguraci logování: " + e.getMessage());
         }
