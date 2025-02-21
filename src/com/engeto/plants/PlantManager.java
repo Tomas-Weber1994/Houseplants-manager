@@ -33,14 +33,10 @@ public class PlantManager {
     }
 
     public List<Plant> getPlantsNeedingWater() {
-        List<Plant> plantsNeedingWater = new ArrayList<>();
-        LocalDate currentDate = LocalDate.now();
-        for (Plant plant : plants) {
-            if (!plant.getNextWateringDate().isAfter(currentDate)) {
-                plantsNeedingWater.add(plant);
-            }
-        }
-        return plantsNeedingWater;
+        return plants
+                .stream()
+                .filter(plant -> plant.getNextWateringDate().isAfter(LocalDate.now()))
+                .toList();
     }
 
     // Default sorting per name

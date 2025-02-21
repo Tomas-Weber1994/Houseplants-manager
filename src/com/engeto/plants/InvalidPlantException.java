@@ -8,10 +8,6 @@ public class InvalidPlantException extends Exception {
         super(message);
     }
 
-    public InvalidPlantException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     public InvalidPlantException(String message, String invalidField, Object invalidValue) {
         super(message);
         this.invalidField = invalidField;
@@ -20,7 +16,14 @@ public class InvalidPlantException extends Exception {
 
     @Override
     public String toString() {
-        return super.toString() +
-                (invalidField != null ? " [Atribut: " + invalidField + ", Hodnota: " + invalidValue + "]" : "");
+        return super.toString() + " [Atribut: " + invalidField + ", Hodnota: " + invalidValue + "].";
+    }
+
+    public String getInvalidField() {
+        return invalidField;
+    }
+
+    public Object getInvalidValue() {
+        return invalidValue;
     }
 }

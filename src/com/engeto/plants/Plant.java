@@ -111,4 +111,9 @@ public class Plant implements Comparable<Plant> {
     public int compareTo(Plant other) {
         return this.name.compareTo(other.name);
     }
+
+    @Override
+    public String toString() {
+        return notes.isEmpty() ? name : name + " (" + notes + ")";
+    }
 }

@@ -38,7 +38,7 @@ public class PlantFileReader {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new PlantFileNotFoundException("Nepodařilo se najít soubor: " + filename);
+            throw new PlantFileNotFoundException("Soubor nenalezen!", filename);
         }
         return List.copyOf(plants);
     }
@@ -61,7 +61,7 @@ public class PlantFileReader {
         try {
             return Integer.parseInt(values[2]);
         } catch (NumberFormatException e) {
-            throw new PlantReadException(filename, lineNumber, "Špatně zadané číslo", values[2]);
+            throw new PlantReadException(filename, lineNumber, "Špatně zadané číslo!", values[2]);
         }
     }
 
@@ -69,7 +69,7 @@ public class PlantFileReader {
         try {
             return LocalDate.parse(values[index]);
         } catch (DateTimeParseException e) {
-            throw new PlantReadException(filename, lineNumber, "Špatně zadané datum", values[index]);
+            throw new PlantReadException(filename, lineNumber, "Špatně zadané datum!", values[index]);
         }
     }
 }
