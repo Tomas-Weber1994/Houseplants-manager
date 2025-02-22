@@ -8,10 +8,6 @@ import java.util.List;
 public class PlantManager {
     List<Plant> plants = new ArrayList<>();
 
-//    public PlantManager(List<Plant> plants) {
-//        this.plants.addAll(plants);
-//    }
-
     public void addPlant(Plant newPlant) {
         plants.add(newPlant);
     }
@@ -48,7 +44,7 @@ public class PlantManager {
         plants.sort(Comparator.comparing(Plant::getLastWateringDate));
     }
 
-    public void addPlantsFromFile(String filename, String delimiter) throws PlantFileNotFoundException, PlantReadException {
+    public void addPlantsFromFile(String filename, String delimiter) throws PlantFileNotFoundException {
         PlantFileReader plantFileReader = new PlantFileReader(filename, delimiter);
         List<Plant> newPlants = plantFileReader.parsePlantsFromFile();
         plants.addAll(newPlants);
