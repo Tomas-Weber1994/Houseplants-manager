@@ -8,8 +8,11 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlantFileReader {
+    private static final Logger logger = Logger.getLogger(PlantFileReader.class.getName());
     private final String filename;
     private final String delimiter;
 
@@ -22,6 +25,7 @@ public class PlantFileReader {
         List<Plant> plants = new ArrayList<>();
         int lineNumber = 0;
 
+        logger.info("Načítám soubor: " + filename + "...");
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))) {
             while (scanner.hasNextLine()) {
                 lineNumber++;
@@ -39,6 +43,8 @@ public class PlantFileReader {
             }
         } catch (FileNotFoundException e) {
             throw new PlantFileNotFoundException("Soubor nenalezen!", filename);
+        } finally {
+            logParsingOutcome(plants);
         }
         return List.copyOf(plants);
     }
@@ -70,6 +76,15 @@ public class PlantFileReader {
             return LocalDate.parse(values[index]);
         } catch (DateTimeParseException e) {
             throw new PlantReadException(filename, lineNumber, "Špatně zadané datum!", values[index]);
+        }
+    }
+
+    private void logParsingOutcome(List<Plant> parsedPlants) {
+        if (parsedPlants.isEmpty()) {
+            logger.log(Level.WARNING,
+                    "Ze souboru se nepodařilo načíst žádné rostliny, nicméně program může klidně pokračovat dál...");
+        } else {
+            logger.info("Ze souboru byly načteny následující rostliny: " + parsedPlants.toString());
         }
     }
 }
