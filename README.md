@@ -9,7 +9,7 @@ Tato aplikace slouží k evidenci pokojových rostlin. Umožňuje správu seznam
 - **Plant** – Třída pro modelování rostliny, která obsahuje informace o názvu, poznámkách, datu zasazení, datu poslední zálivky a frekvenci zálivky.
 - **PlantManager** – Třída pro správu seznamu rostlin, která umožňuje přidávání, odebírání, řazení a zalévání rostlin. Volá třídy **PlantFileReader** pro načítání a **PlantFileWriter** pro zápis rostlin do souborů.
 - **PlantFileReader** – Třída pro načítání rostlin ze souboru ve formátu TXT. Při čtení souboru automaticky přeskočí řádky s chybami a loguje je do souboru.
-- **PlantFileWriter** – Třída pro zápis rostlin do souboru ve formátu TXT. Exportuje seznam rostlin do textového souboru s oddělovači, které lze později načíst.
+- **PlantFileWriter** – Třída pro zápis rostlin do souboru ve formátu TXT. 
 
 ## Struktura souborů:
 - **/resources** – Složka obsahující soubory s daty o rostlinách, které se načítají při spuštění aplikace.
