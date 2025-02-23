@@ -1,12 +1,21 @@
 # Aplikace pro správu pokojových rostlin
 
 ## Popis
-Tato aplikace slouží k evidenci pokojových rostlin. Umožňuje správu seznamu rostlin, jejich přidávání, zalévání, odebírání a úpravu, včetně načítání a ukládání dat ze souborů.
+Tato aplikace slouží k evidenci pokojových rostlin. Umožňuje správu seznamu rostlin, jejich přidávání, zalévání, odebírání a úpravu, včetně načítání a ukládání dat ze souborů. Aplikace také loguje operace do souboru pro snadnou sledovatelnost.
 
 ## Struktura aplikace
 
-### Hlavní Třídy:
+### Hlavní třídy:
 - **Plant** – Třída pro modelování rostliny, která obsahuje informace o názvu, poznámkách, datu zasazení, datu poslední zálivky a frekvenci zálivky.
-- **PlantManager** – Třída, která spravuje seznam rostlin a umožňuje manipulaci s nimi (přidávání, odebírání, řazení atd.). Třída volá PlantFileReader a PlantFileWriter.
-- **PlantFileReader** – Třída pro načítání rostlin ze souboru txt. Zajišťuje, že při čtení souboru dojde k přeskočení chybných řádků, kdy aplikace zaloguje chyby a načte pouze řádky bez chyb.
-- **PlantFileWriter** – Třída pro zápis rostlin do souboru. Umožňuje exportovat seznam rostlin do formátu txt.
+- **PlantManager** – Třída pro správu seznamu rostlin, která umožňuje přidávání, odebírání, řazení a zalévání rostlin. Volá třídy **PlantFileReader** pro načítání a **PlantFileWriter** pro zápis rostlin do souborů.
+- **PlantFileReader** – Třída pro načítání rostlin ze souboru ve formátu TXT. Při čtení souboru automaticky přeskočí řádky s chybami a loguje je do souboru.
+- **PlantFileWriter** – Třída pro zápis rostlin do souboru ve formátu TXT. Exportuje seznam rostlin do textového souboru s oddělovači, které lze později načíst.
+
+## Struktura souborů:
+- **/resources** – Složka obsahující soubory s daty o rostlinách, které se načítají při spuštění aplikace.
+- **/logs** – Složka pro logovací soubory aplikace, které zaznamenávají operace a případné chyby během činnosti programu.
+
+## Použití:
+1. Načítání a zápis rostlin se provádí pomocí tříd **PlantFileReader** a **PlantFileWriter**.
+2. Aplikace automaticky loguje všechny operace (např. čtení souboru, přidání nové rostliny) do souboru ve složce **/logs**.
+3. Aplikaci spustíte jednoduše přes metodu `main`, která načte seznam rostlin a provede požadované operace.
