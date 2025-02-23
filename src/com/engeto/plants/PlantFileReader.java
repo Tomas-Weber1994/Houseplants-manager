@@ -83,9 +83,9 @@ public class PlantFileReader {
 
     private void logParsedPlants(List<Plant> parsedPlants) {
         if (parsedPlants.isEmpty()) {
-            logger.severe("Ze souboru se nepodařilo načíst žádné rostliny.");
+            logger.severe("Ze souboru se nepodařilo načíst žádné rostliny.\n");
         } else {
-            logger.info("Načtené rostliny: " + parsedPlants);
+            logger.info("Načtené rostliny ze souboru: " + parsedPlants + "\n");
         }
     }
 

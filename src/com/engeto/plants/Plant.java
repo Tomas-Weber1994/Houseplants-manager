@@ -2,8 +2,10 @@ package com.engeto.plants;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 public class Plant implements Comparable<Plant> {
+    private static final Logger logger = Logger.getLogger(Plant.class.getName());
     private String name;
     private String notes;
     private LocalDate plantDate;
@@ -29,12 +31,12 @@ public class Plant implements Comparable<Plant> {
     }
 
     public String getWateringInfo() {
-        return "\nDatum poslední zálivky: " +
-                formatDate(lastWateringDate) + "\nDoporučené datum příští zálivky: " +
+        return "\nDoporučené datum příští zálivky: " +
                 formatDate(getNextWateringDate());
     }
 
     public void doWateringNow() {
+        logger.info("Byla zalita rostlina: " + name );
         lastWateringDate = LocalDate.now();
     }
 
@@ -59,7 +61,10 @@ public class Plant implements Comparable<Plant> {
 
     private void validateLastWateringDate() throws InvalidPlantException {
         if (lastWateringDate.isBefore(plantDate)) {
-            throw new InvalidPlantException("Datum poslední zálivky nesmí být starší než datum vysazení rostliny!");
+            throw new InvalidPlantException(
+                    "Datum poslední zálivky nesmí být starší než datum vysazení rostliny!",
+                    "lastWateringDate",
+                    lastWateringDate);
         }
     }
 
@@ -80,7 +85,7 @@ public class Plant implements Comparable<Plant> {
         this.notes = notes;
     }
 
-    public LocalDate getPlantDate() {
+    public LocalDate getPlantedDate() {
         return plantDate;
     }
 
@@ -114,6 +119,6 @@ public class Plant implements Comparable<Plant> {
 
     @Override
     public String toString() {
-        return notes.isEmpty() ? name : name + " (" + notes + ")";
+        return name + ", datum poslední zálivky: " + formatDate(lastWateringDate);
     }
 }
