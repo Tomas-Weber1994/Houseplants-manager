@@ -1,21 +1,21 @@
-# Aplikace pro správu pokojových rostlin
+# Application for Managing Houseplants
 
-## Popis
-Tato aplikace slouží k evidenci pokojových rostlin. Umožňuje správu seznamu rostlin, jejich přidávání, zalévání, odebírání a úpravu, včetně načítání a ukládání dat ze souborů. Aplikace také loguje operace do souboru pro snadnou sledovatelnost.
+## Description
+This is a basic application which is designed for managing houseplants. It allows you to maintain a list of plants, including adding, watering, removing, and modifying them, as well as loading and saving data from files. The application also logs operations to a file for easy traceability.
 
-## Struktura aplikace
+## Application Structure
 
-### Hlavní třídy:
-- **Plant** – Třída pro modelování rostliny, která obsahuje informace o názvu, poznámkách, datu zasazení, datu poslední zálivky a frekvenci zálivky.
-- **PlantManager** – Třída pro správu seznamu rostlin, která umožňuje přidávání, odebírání, řazení a zalévání rostlin. Volá třídy **PlantFileReader** pro načítání a **PlantFileWriter** pro zápis rostlin do souborů.
-- **PlantFileReader** – Třída pro načítání rostlin ze souboru ve formátu TXT. Při čtení souboru automaticky přeskočí řádky s chybami a loguje je do souboru.
-- **PlantFileWriter** – Třída pro zápis rostlin do souboru ve formátu TXT. 
+### Main Classes:
+- **Plant** – A class for modeling a plant, which contains information about the name, notes, planting date, last watering date, and watering frequency.
+- **PlantManager** – A class for managing the plant list, which allows adding, removing, sorting, and watering plants. It calls the **PlantFileReader** class for loading and the **PlantFileWriter** class for writing plants to files.
+- **PlantFileReader** – A class for reading plants from a TXT file. When reading a file, it automatically skips lines with errors and logs them to a file.
+- **PlantFileWriter** – A class for writing plants to a TXT file.
 
-## Struktura souborů:
-- **/resources** – Složka obsahující soubory s daty o rostlinách, které se načítají při spuštění aplikace.
-- **/logs** – Složka pro logovací soubory aplikace, které zaznamenávají operace a případné chyby během činnosti programu.
+## File Structure:
+- **/resources** – A folder containing files with plant data, which are loaded when the application starts.
+- **/logs** – A folder for the application's log files, which record operations and potential errors during program execution.
 
-## Použití:
-1. Načítání a zápis rostlin se provádí pomocí tříd **PlantFileReader** a **PlantFileWriter**.
-2. Aplikace automaticky loguje všechny operace (např. čtení souboru, přidání nové rostliny) do souboru ve složce **/logs**.
-3. Aplikaci spustíte jednoduše přes metodu `main`, která načte seznam rostlin a provede požadované operace.
+## Usage:
+1. Plant loading and saving are handled by the **PlantFileReader** and **PlantFileWriter** classes.
+2. The application automatically logs all operations (e.g., file reading, adding a new plant) to a file in the **/logs** folder.
+3. To run the application, simply use the `main` method, which will load the plant list and perform the desired operations.
